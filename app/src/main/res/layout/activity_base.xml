@@ -1,0 +1,75 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="employee"
+            type="com.zfj.android.databindingbasedemo.Employee" />
+
+        <variable
+            name="presenter"
+            type="com.zfj.android.databindingbasedemo.BaseSampleActivity.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.zfj.android.databindingbasedemo.BaseSampleActivity">
+
+        <ViewStub
+            android:id="@+id/viewstub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout="@layout/viewstub" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入First Name"
+            android:onTextChanged="@{presenter.onTextChanged}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入Last Name" />
+
+        <TextView
+            android:id="@+id/first_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="@{presenter.onClick}"
+            android:text="@{employee.firstName}"
+            tools:text="11111111" />
+
+        <TextView
+            android:id="@+id/last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="@{()->presenter.onClickListenerBinding(employee)}"
+            android:text="@{employee.lastName}"
+
+            tools:text="11111111" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{String.valueOf(1+2)}"
+            android:visibility="@{employee.isFired?View.GONE:View.VISIBLE}"/>
+
+        <include
+            layout="@layout/include_layout"
+            bind:employee="@{employee}" />
+    </LinearLayout>
+
+
+</layout>
